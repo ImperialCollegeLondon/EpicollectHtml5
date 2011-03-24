@@ -1,0 +1,149 @@
+<epicollect> 
+
+<model> 
+<submission id="ahBlcGljb2xsZWN0c2VydmVycg8LEgdQcm9qZWN0GKbgFAw" projectName="demoproject" allowDownloadEdits="false" versionNumber="1.1" />
+</model>
+
+	<input ref="name" required="true" title="true">
+		<label>What is your name?</label>
+	</input>
+	
+	<select1 ref="age" required="true" chart="bar">
+		<label>What is your age?</label>
+			<item>
+				<label>below10</label>
+				<value>below10</value>
+			</item> 
+			<item>
+				<label>11to20</label>
+			    <value>11to20</value>
+			</item> 
+			<item>
+				<label>21to30</label>
+				<value>21to30</value>
+			</item> 
+			<item>
+				<label>31to40</label>
+			    <value>31to40</value>
+			</item>
+			<item>
+			    <label>41to50</label>
+			    <value>41to50</value>
+			</item> 
+			<item>
+				<label>51to60</label>
+				<value>51to60</value>
+			</item> 
+			<item>
+				<label>61to70</label>
+				<value>61to70</value>
+			</item> 
+			<item>
+				<label>above70</label>
+				<value>above70</value>
+			</item> 
+			</select1>
+			
+	<select1 ref="sex" required="true"> 
+		<label>Male or Female?</label> 
+			<item>
+				<label>Male</label>
+				<value>Male</value>
+			</item> 
+			<item>
+				<label>Female</label>
+				<value>Female</value>
+			</item> 
+	</select1>
+	
+	<select1 ref="searchengine" required="true" chart="bar"> 
+		<label>Which search engine do you most often use?</label>
+			<item>
+				<label>Google</label>
+				<value>Google</value>
+			</item> 
+			<item>
+				<label>Yahoo</label>
+				<value>Yahoo</value>
+			</item> 
+			<item>
+				<label>Baidu</label>
+				<value>Baidu</value>
+			</item> 
+			<item>
+				<label>Bing</label>
+				<value>Bing</value>
+			</item> 
+			<item>
+				<label>Ask</label>
+				<value>Ask</value>
+			</item> 
+			<item>
+				<label>AOL</label>
+				<value>AOL</value>
+			</item> 
+			<item>
+				<label>AltaVista</label>
+				<value>AltaVista</value>
+			</item> 
+			<item>
+				<label>other</label>
+				<value>other</value>
+			</item> 
+	 </select1>
+	 <select ref="socialnetworks" required="true" chart="pie">
+	 	<label>Which social networking sites do you use?</label> 
+	 		<item>
+	 			<label>MySpace</label>
+	 			<value>MySpace</value>
+	 		</item> 
+	 		<item>
+	 			<label>Facebook</label>
+	 			<value>Facebook</value>
+	 		</item> 
+	 		<item>
+	 			<label>Hi5</label>
+	 			<value>Hi5</value>
+	 		</item> 
+	 		<item>
+	 			<label>Friendster</label>
+	 			<value>Friendster</value>
+	 		</item> 
+	 		<item>
+	 			<label>Orkut</label>
+	 			<value>Orkut</value>
+	 		</item>
+	 		<item>
+	 			<label>Bebo</label>
+	 			<value>Bebo</value>
+	 		</item> 
+	 		<item>
+	 			<label>Tagged</label>
+	 			<value>Tagged</value>
+	 		</item> 
+	 		<item>
+	 			<label>Xing</label>
+	 			<value>Xing</value>
+	 		</item> 
+	 		<item>
+	 			<label>Badoo</label>
+	 			<value>Badoo</value>
+	 		</item> 
+	 		<item>
+	 			<label>Xanga</label>
+	 			<value>Xanga</value>
+	 		</item> 
+	 		<item>
+	 			<label>51.com</label>
+	 			<value>51com</value>
+	 		</item>
+	 		<item>
+	 			<label>Xiaonei</label>
+	 			<value>Xiaonei</value>
+	 		</item> 
+	 		<item>
+	 			<label>ChinaRen</label>
+	 			<value>ChinaRen</value>
+	 		</item> 
+	 	</select>
+	</epicollect>
