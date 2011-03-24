@@ -22,6 +22,10 @@
 	  max-height: 200px;
 	  max-width: 200px;
     }
+	
+	DIV#gallary > IMG {
+		float: left;
+	}
   </style>
 </head>
 <body>
@@ -31,10 +35,12 @@
   <h2>Image thumbnail:</h2>
   <img id="img-previewer" class="preview-image"/>
   <h2>Image data url:</h2>
-  <div id="file-info"></div>
+  <div><input type="button" onclick="onClickSaveToLocal(this);" value="Save to local"/></div>
+  <h2>Gallary for local storage: </h2>
+  <div id="gallary"></div>
 </form>
 
-
+<script type="text/javascript" src="json.js"></script>
 <script type="text/javascript" src="imgreader.js"></script>
 </body>
 </html>
