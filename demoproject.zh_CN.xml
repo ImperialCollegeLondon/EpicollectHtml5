@@ -5,59 +5,59 @@
 </model>
 
 	<input ref="name" required="true" title="true">
-		<label>What is your name?</label>
+		<label>名字？</label>
 	</input>
 	
 	<select1 ref="age" required="true" chart="bar">
-		<label>What is your age?</label>
+		<label>年龄？</label>
 			<item>
-				<label>below10</label>
+				<label>小于 10 岁</label>
 				<value>below10</value>
 			</item> 
 			<item>
-				<label>11to20</label>
+				<label>11 到 20 岁</label>
 			    <value>11to20</value>
 			</item> 
 			<item>
-				<label>21to30</label>
+				<label>21 到 30 岁</label>
 				<value>21to30</value>
 			</item> 
 			<item>
-				<label>31to40</label>
+				<label>31 到 40 岁</label>
 			    <value>31to40</value>
 			</item>
 			<item>
-			    <label>41to50</label>
+			    <label>41 到 50 岁</label>
 			    <value>41to50</value>
 			</item> 
 			<item>
-				<label>51to60</label>
+				<label>51 到 60 岁</label>
 				<value>51to60</value>
 			</item> 
 			<item>
-				<label>61to70</label>
+				<label>61 到 70 岁</label>
 				<value>61to70</value>
 			</item> 
 			<item>
-				<label>above70</label>
+				<label>大于 70 岁</label>
 				<value>above70</value>
 			</item> 
 			</select1>
 			
 	<select1 ref="sex" required="true"> 
-		<label>Male or Female?</label> 
+		<label>性别？</label> 
 			<item>
-				<label>Male</label>
+				<label>男</label>
 				<value>Male</value>
 			</item> 
 			<item>
-				<label>Female</label>
+				<label>女</label>
 				<value>Female</value>
 			</item> 
 	</select1>
 	
 	<select1 ref="searchengine" required="true" chart="bar"> 
-		<label>Which search engine do you most often use?</label>
+		<label>你经常使用哪个搜索引擎？</label>
 			<item>
 				<label>Google</label>
 				<value>Google</value>
@@ -92,7 +92,7 @@
 			</item> 
 	 </select1>
 	 <select ref="socialnetworks" required="true" chart="pie">
-	 	<label>Which social networking sites do you use?</label> 
+	 	<label>你使用哪个社交网络？</label> 
 	 		<item>
 	 			<label>MySpace</label>
 	 			<value>MySpace</value>
