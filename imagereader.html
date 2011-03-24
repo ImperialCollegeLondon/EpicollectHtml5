@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+  <title>HTML5 Image preview</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <style type="text/css">
+    body {
+      margin: 20px;
+      font: 80% / normal 'arial', 'sans-serif';
+    }
+
+    #upload {
+      border: solid 3px #ccc;
+    }
+
+    .preview-image {
+      display: block;
+      margin: 10px 0;
+      border: solid 3px #aaa;
+      padding: 1px;
+      background: #fff;
+	  max-height: 200px;
+	  max-width: 200px;
+    }
+  </style>
+</head>
+<body>
+
+<form>
+  <input type="file" id="upload" style="width:400px; padding:3px;" onchange="try {onchange_file(this);} catch(e) {alert(e);}" />
+  <h2>Image thumbnail:</h2>
+  <img id="img-previewer" class="preview-image"/>
+  <h2>Image data url:</h2>
+  <div id="file-info"></div>
+</form>
+
+
+<script type="text/javascript" src="imgreader.js"></script>
+</body>
+</html>
+
