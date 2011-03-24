@@ -2,7 +2,7 @@ function init() {
 	if (null == window.localStorage.getItem('items')) {
 		window.localStorage.setItem('items', JSON.stringify([]));
 	} else {
-		document.getElementById('gallary').innerHTML = '';
+		document.getElementById('gallery').innerHTML = '';
 		var items = JSON.parse(window.localStorage.getItem('items'));
 		for (var i = 0; i < items.length; i++) {
 			onAddNewItem(items[i]);
@@ -56,10 +56,32 @@ function onClickSaveToLocal(input) {
 	onAddNewItem(itemId);
 }
 
+function onClickDelImg(itemId) {
+	var items = JSON.parse(window.localStorage.getItem('items'));
+	var newItems = [];
+	for (var i = 0; i < items.length; i++) {
+		if (items[i] != itemId) {
+			newItems.push(items[i]);
+		}
+	}
+	
+	window.localStorage.setItem('items', JSON.stringify(newItems));
+	window.localStorage.removeItem(itemId);
+	document.getElementById(itemId).parentNode.removeChild(document.getElementById(itemId));
+}
+
 function onAddNewItem(itemId) {
 	var item = JSON.parse(window.localStorage.getItem(itemId));
+	var div = document.createElement('DIV');
+	div.id = itemId;
 	var img = document.createElement('IMG');
 	img.className = 'preview-image';
 	img.src = item['img'];
-	document.getElementById('gallary').appendChild(img);
+	var span = document.createElement('SPAN');
+	span.className = 'img-del';
+	span.innerHTML = 'Del';
+	span.setAttribute('onclick', 'onClickDelImg(\'' + itemId + '\')');
+	div.appendChild(img);
+	div.appendChild(span);
+	document.getElementById('gallery').appendChild(div);
 }

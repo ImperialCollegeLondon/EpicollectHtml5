@@ -23,8 +23,12 @@
 	  max-width: 200px;
     }
 	
-	DIV#gallary > IMG {
+	DIV#gallery > DIV {
 		float: left;
+	}
+	
+	DIV#gallery SPAN.img-del {
+		cursor: pointer;
 	}
   </style>
 </head>
@@ -37,7 +41,7 @@
   <h2>Image data url:</h2>
   <div><input type="button" onclick="onClickSaveToLocal(this);" value="Save to local"/></div>
   <h2>Gallery for local storage: </h2>
-  <div id="gallary"></div>
+  <div id="gallery"></div>
 </form>
 
 <script type="text/javascript" src="json.js"></script>
