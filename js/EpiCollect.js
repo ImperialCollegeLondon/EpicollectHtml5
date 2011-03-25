@@ -147,7 +147,7 @@ function createHtml5FormControl(ctrl)
             for(var o = 0; o < ctrl.options.length; o++)
             {
                 c.appendChild(createDOMElement('span', '', 'optionLabel', ctrl.options[o].label));
-                c.appendChild(createDOMElement('input', ctrl.options[o].value, '', '',{ type : 'checkbox', name : ctrl.options[o].value}));
+                c.appendChild(createDOMElement('input', ctrl.options[o].value, '', '',{ type : 'checkbox', name : ctrl.name, value : ctrl.options[o].value}));
             }
             break;
         case 'input' :
@@ -177,4 +177,28 @@ function createDOMElement(tagName, id, className, content, attributes)
         }
     }
     return ele;
+}
+
+function displayLocalData()
+{
+    var fields = [];
+    
+    for(var h = 0; h < form.controls.length; h++)
+    {
+        fields.push(form.controls[h].name);
+    }
+    fields.push('location');
+    fields.push('image');
+    
+    for(var f = 0; f < fields.length; f++)
+    {
+        var he = createDOMElement('th', '', '', fields[f].name);
+        document.getElementById('localData').tHead.appendChild(he);
+    }
+    
+    var ents = window.localStoreage.getItem('items');
+    for(var i = 0; i < ents.length; i++)
+    {
+        
+    }
 }
