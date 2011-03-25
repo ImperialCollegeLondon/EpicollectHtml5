@@ -59,7 +59,6 @@ function parseCtrl(nd)
             }
             ctrl.options.push(opt);
         }   
-    
     }
     return ctrl;
 }
@@ -122,10 +121,9 @@ function drawForm(form, target)
     
     target.appendChild(createDOMElement('h2', 'header', '', form.name + ' v ' + form.version));
     
-   var frm = createDOMElement('form', 'epiForm', '');
+    var frm = createDOMElement('form', 'epiForm', '', '');
     for(var i = 0; i < form.controls.length; i++)
     {
-        frm.appendChild(createDOMElement('span', '', 'controlLabel', form.controls[i].label));
         frm.appendChild(createHtml5FormControl(form.controls[i]));
     }
     
@@ -140,6 +138,8 @@ function createHtml5FormControl(ctrl)
         input : 'input',
         select : 'div'
     }
+    var d = createDOMElement('div', '', 'ctrlRow', '');
+    d.appendChild(createDOMElement('span', '', 'controlLabel', ctrl.label));
     var c = createDOMElement(tags[ctrl.type], ctrl.name, 'ctrl', '', ctrl);
     switch(ctrl.type)
     {
@@ -160,7 +160,8 @@ function createHtml5FormControl(ctrl)
             }
             break;
     }
-    return c;
+    d.appendChild(c)
+    return d;
 }
 
 function createDOMElement(tagName, id, className, content, attributes)
