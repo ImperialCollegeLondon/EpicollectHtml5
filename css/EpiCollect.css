@@ -1,5 +1,5 @@
 /* RESET!!! */
-html, body, div, img, h1, h2, h3, h4, h5, h6, ul, ol, dl, li, dt, dd, p, blockquote, pre, form, fieldset, table, th, td { margin: 0; padding: 0; border-spacing:0; }  
+html, body, div, img, h1, h2, h3, h4, h5, h6, ul, ol, dl, li, dt, dd, p, blockquote, pre, span, form, fieldset, table, th, td { margin: 0; padding: 0; border-spacing:0; }  
 
 img{ border:0;}
 body{
@@ -28,32 +28,39 @@ a:hover
 	text-decoration : underline;
 }
 
-.projectImage
+.tab
 {
-	float:right;
-}
-
-.hMenu
-{
-	width : 75%;
-	text-align : center;
+	background-color: #CCCCCC;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	color: #FFFFFF;
+	overflow: hidden;
+	padding: 2px 10px 2px 10px;	
 	
 }
 
-.menuItem
+.tab:hover
 {
-	display : inline-block;
-	width: 150px;
+	color: #000000;
+	cursor: pointer;
 }
 
-.rightie
+.tab.selected
 {
-	float: right;
+	background-color: #9999FF;
+	color: #000000;
 }
 
-.leftie
+.pane
 {
-	float: left;
+	display: none;
+}
+
+.pane.selected
+{
+	display: block;
+	width: 100%;
+	border: 1px solid #CCCCCC;
 }
 
 #loginStatus{

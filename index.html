@@ -1,9 +1,50 @@
-<!DOCTYPE html!>
+<!DOCTYPE html>
 <html>
     <head>
         <title>EpiCollect HTML5</title>
+        <link href="./css/EpiCollect.css" rel="stylesheet" type="text/css" />
+        <script src="./js/layout.js" type="text/javascript"></script>
+        <script src = "./js/EpiCollect.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            var form;
+        
+            var Handler = function(){
+                var target = document;
+                var handler = false;    
+            }
+        
+            function init()
+            {
+                var tabs = document.getElementsByTagName('span');
+                for(var t = 0; t < tabs.length; t++)
+                {
+                    var h = {
+                        target : tabs[t],
+                        handler : function(e){
+                            selectTab(this.id);
+                        }
+                    }
+                    tabs[t].onclick = h.handler;
+                }
+                
+                getXML('./demoproject.en_US.xml', draw);
+            }
+            
+            function draw(xml)
+            {
+                form = parseXML(xml);
+                drawForm(xml, 'collect');
+            }
+            
+        </script>
     </head>
-    <body>
-        <h1>EpiCollect HTML5 Client</h1>
+    <body onload="init();">
+        <div id="head"><h1>EpiCollect HTML5 Client</h1></div>
+        <div id="tabRow">
+            <span id="collectTab" class="tab selected">Collect</span>
+            <span id="showDataTab" class="tab">Display Data</span>
+        </div>
+        <div id="collect" class="pane selected">Collect Data</div>
+        <div id="showData" class="pane">Show Data</div>
     </body>
 </html>

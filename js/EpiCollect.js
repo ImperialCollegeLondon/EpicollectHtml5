@@ -79,6 +79,72 @@ function parseXML(xml)
                 ctrl = addOptions(xml.childNode[i], ctrl);
                 break;  
         }
+        form.controls.push(ctrl);
+    }
+    return form;
+}
+
+function drawForm(form, target)
+{
+    if(typeof target == "string")
+    {
+        target = document.getElementById(target);
+    }
+
+    target.appendChild(createDOMElement('h2', 'header', '', form.name + ' v ' + form.version));
+    
+    var frm = createDOMElement('form', 'epiForm', '');
+    for(var i = 0; i < form.controls.length; i++)
+    {
+        frm.appendChild(createDOMElement('span', '', 'controlLabel', form.controls[i].label));
+        frm.appendChild(createHtml5FormControl(form.controls[i]));
     }
     
+    target.appendChild(frm);
+    
+}
+
+function createHtml5FormControl(ctrl)
+{
+    var tags = {
+        select1 : 'select',
+        input : 'input',
+        select : 'div'
+    }
+    var c = createDOMElement(tags[ctrl.type], ctrl.name, 'ctrl', '', ctrl);
+    switch(ctrl.type)
+    {
+        case 'select' :
+            for(var o = 0; o < ctrl.options.length; o++)
+            {
+                c.appendChild(createDOMElement('span', '', 'optionLabel', ctrl.options[o].label));
+                c.appendChild(createDOMElement('input', ctrl.options[o].value, '', '',{ type : 'checkbox', name : ctrl.options[o].value}));
+            }
+            break;
+        case 'input' :
+            break;
+        case ' select1' :
+            for(var o = 0; o < ctrl.options.length; o++)
+            {
+                c.appendChild(createDOMElement('option', '', 'optionLabel', ctrl.options[o].label, {value : ctrls.options[o].value}));
+                
+            }
+            break;
+    }
+    
+}
+
+function createDOMElement(tagName, id, className, content, attributes)
+{
+    var ele = document.createElement(tagName);
+    ele.id = id;
+    ele.className = className;
+    ele.innerHtml = content;
+    if(attributes)
+    {
+        for(att in attributes){
+            ele.setAttribute(att, attributes[att]);
+        }
+    }
+    return ele;
 }
