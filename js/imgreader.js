@@ -121,7 +121,7 @@ function onClickGeolocation(input) {
 
 /************** functions for adding epiForm to local storage ******************/
 
-function onClickSaveEpiForm() {
+function onClickSaveEpiForm(input) {
 	var epiForm = document.getElementById('epiForm');
 	if (!epiForm) {
 		return;
@@ -140,7 +140,7 @@ function onClickSaveEpiForm() {
 		sex:  epiForm.sex.value.trim(),
 		searchengine:   epiForm.searchengine.value,
 		socialnetworks: socialnetworks,
-		geolocation:    document.getElementById('geolocation'),
+		geolocation:    document.getElementById('geolocation').value.trim(),
 		img: document.getElementById('img-previewer').src
 	};
 	
