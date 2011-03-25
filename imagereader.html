@@ -35,6 +35,10 @@
 <body>
 
 <form>
+  <input id="geolocation" type="input" /> <input type="button" value="Get my location" onclick="onClickGeolocation(document.getElementById('geolocation'));" />
+  <img src="images/throbber.gif" id="throbber" style="display:none;" />
+  <br/>
+  
   <input type="file" id="upload" style="width:400px; padding:3px;" onchange="try {onchange_file(this);} catch(e) {alert(e);}" />
   <h2>Image thumbnail:</h2>
   <img id="img-previewer" class="preview-image"/>

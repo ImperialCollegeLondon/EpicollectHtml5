@@ -85,3 +85,21 @@ function onAddNewItem(itemId) {
 	div.appendChild(span);
 	document.getElementById('gallery').appendChild(div);
 }
+
+
+/********* functions for geolocation *******/
+function onClickGeolocation(input) {
+	function _showThrobber(show) {
+		document.getElementById('throbber').style.display = show ? 'block' : 'none';
+	}
+	input.value = '';
+	_showThrobber(true);
+	navigator.geolocation.getCurrentPosition(function(position) {
+		_showThrobber(false);
+		input.value = position.coords.latitude + ',' + position.coords.longitude;
+	}, function(positionError) {
+		_showThrobber(false);
+		alert("error code: " + positionError.code);
+	});
+}
+/************* end ************/
