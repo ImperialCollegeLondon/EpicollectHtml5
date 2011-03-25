@@ -49,10 +49,12 @@
         <div id="collect" class="pane selected">
             <div id="formPanel">
             </div>
-            <div class="ctrlRow"><span class="ctrlLabel">Location</span><img src="images/throbber.gif" id="throbber" style="display:none;" /><input id="geolocation" type="input" /> <input type="button" value="Get my location" onclick="onClickGeolocation(document.getElementById('geolocation'));" /></div>
+            <div class="ctrlRow"><span class="ctrlLabel">Location</span><img src="images/throbber.gif" id="throbber" style="display:none;" /><input id="geolocation" name="geolocation" type="input" /> <input type="button" value="Get my location" onclick="onClickGeolocation(document.getElementById('geolocation'));" /></div>
             <div class="ctrlRow"><span class="ctrlLabel">Photo</span> <input type="file" id="upload" style="width:400px; padding:3px;" onchange="try {onchange_file(this);} catch(e) {alert(e);}" /></div>
             <img id="img-previewer" style="" />
-            <div><input type="button" onclick="onClickSaveToLocal(this);" value="Save to local"/></div>
+            <div><input type="button" onclick="onClickSaveEpiForm(this);" value="Save to local"/></div>
+			
+            <div><input type="button" onclick="onClickClearEpiData(this);" value="Clear All Data"/></div>
         </div>
         <div id="showData" class="pane">
             <h2>Locally Saved Data</h2>

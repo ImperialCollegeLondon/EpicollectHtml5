@@ -117,3 +117,60 @@ function onClickGeolocation(input) {
 	});
 }
 /************* end ************/
+
+
+/************** functions for adding epiForm to local storage ******************/
+
+function onClickSaveEpiForm() {
+	var epiForm = document.getElementById('epiForm');
+	if (!epiForm) {
+		return;
+	}
+	
+	var socialnetworks = [];
+	for (var i = 0; i < epiForm.socialnetworks.length; i++) {
+		if (epiForm.socialnetworks[i].checked) {
+			socialnetworks.push(epiForm.socialnetworks[i].value);
+		}
+	}
+	
+	var epiData = {
+		name: epiForm.name.value.trim(),
+		age:  epiForm.age.value.trim(),
+		sex:  epiForm.sex.value.trim(),
+		searchengine:   epiForm.searchengine.value,
+		socialnetworks: socialnetworks,
+		geolocation:    document.getElementById('geolocation'),
+		img: document.getElementById('img-previewer').src
+	};
+	
+	// TODO do some checking
+	
+	var itemsStr = window.localStorage.getItem('items');
+	var items = JSON.parse(!itemsStr ? '[]' : itemsStr);
+	var itemId = 'item-' + new Date().getTime();
+	items.push(itemId);
+	
+	try {
+		window.localStorage.setItem(itemId, JSON.stringify(epiData));
+		window.localStorage.setItem('items', JSON.stringify(items));
+		// onAddNewItem(itemId);
+	} catch (e) {
+		alert('Error occurs when adding data to local storage: '  + e);
+	}	
+}
+
+function onClickClearEpiData() {
+	var itemsStr = window.localStorage.getItem('items');
+	var items = JSON.parse(!itemsStr ? '[]' : itemsStr);	
+	items.forEach(function(itemId) {
+		if (!window.localStorage.getItem(itemId)) {
+			return;
+		}
+		
+		window.localStorage.removeItem(itemId);
+	});
+	
+	window.localStorage.removeItem('items');
+}
+/************** end ************/
