@@ -43,17 +43,27 @@ function onClickSaveToLocal(input) {
 		return;
 	}
 	
+	var geoInput = document.getElementById('geolocation');
+	if (!geoInput.value.trim()) {
+		geoInput.focus();
+		return;
+	}
+	
 	var obj = {};
 	obj['img'] = document.getElementById('img-previewer').src;
+	obj['geo'] = geoInput.value;
 	
 	var items = JSON.parse(window.localStorage.getItem('items'));
 	var itemId = 'item-' + new Date().getTime();
 	items.push(itemId);
 	
-	window.localStorage.setItem('items', JSON.stringify(items));
-	window.localStorage.setItem(itemId, JSON.stringify(obj));
-	
-	onAddNewItem(itemId);
+	try {
+		window.localStorage.setItem(itemId, JSON.stringify(obj));
+		window.localStorage.setItem('items', JSON.stringify(items));
+		onAddNewItem(itemId);
+	} catch (e) {
+		alert('Error occurs when adding data to local storage: '  + e);
+	}
 }
 
 function onClickDelImg(itemId) {
@@ -79,9 +89,31 @@ function onAddNewItem(itemId) {
 	img.src = item['img'];
 	var span = document.createElement('SPAN');
 	span.className = 'img-del';
-	span.innerHTML = 'Del';
+	span.innerHTML = 'X';
+	span.title = 'Remove';
 	span.setAttribute('onclick', 'onClickDelImg(\'' + itemId + '\')');
+	var geoDiv = document.createElement('DIV');
+	geoDiv.textContent = 'geolocation: ' + item.geo;
 	div.appendChild(img);
+	div.appendChild(geoDiv);
 	div.appendChild(span);
 	document.getElementById('gallery').appendChild(div);
 }
+
+
+/********* functions for geolocation *******/
+function onClickGeolocation(input) {
+	function _showThrobber(show) {
+		document.getElementById('throbber').style.display = show ? 'block' : 'none';
+	}
+	input.value = '';
+	_showThrobber(true);
+	navigator.geolocation.getCurrentPosition(function(position) {
+		_showThrobber(false);
+		input.value = position.coords.latitude + ',' + position.coords.longitude;
+	}, function(positionError) {
+		_showThrobber(false);
+		alert("error code: " + positionError.code);
+	});
+}
+/************* end ************/
