@@ -59,7 +59,7 @@ function parseXML(xml)
     
     for(var i = 0; i < xml.childNodes.length; i++){    
         if(xml.childNodes[i].nodeType != 1) continue;
-        switch(xml.childNodes[i].name)
+        switch(xml.childNodes[i].nodeName)
         {
             case "model":
                 var model = xml.getElementsByTagName("submission")[0];
