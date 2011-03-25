@@ -24,22 +24,49 @@ function getXML(url, callback)
     }    
 }
 
-function parseCtrl(ele)
+function parseCtrl(nd)
 {
-    ctrl = {
-        name : ele.getAttribute('ref'),
-        type : ele.tagName,
-        required : ele.getAttribute('required'),
-        title: ele.getAttribute('title'),
-        chart : ele.getAttribute('chart'),
-        label : ele.getElementByTagName('label')[0].firstChild.data
-    };
+    var ctrl = {options : []};
+    var attrName;
+    var opt;
+    
+    ctrl.name = nd.attributes.getNamedItem('ref').value;
+    ctrl.type = nd.nodeName;
+    ctrl.required = nd.attributes.getNamedItem('required') ? nd.attributes.getNamedItem('required').value : false;
+    ctrl.title = nd.attributes.getNamedItem('title') ? nd.attributes.getNamedItem('title').value : false;
+    ctrl.chart = nd.attributes.getNamedItem('chart') ? nd.attributes.getNamedItem('chart').value : false;
+    
+    for(var i = 0; i < nd.childNodes.length; i++)
+    {
+        
+        if(nd.childNodes[i].nodeType != 1) continue;
+        if(nd.childNodes[i].nodeName == 'label')
+        {
+            ctrl.label = nd.childNodes[i].firstChild.data;
+            
+        }
+        else if(nd.childNodes[i].nodeName == 'item')
+        {
+            opt = {};
+            for(var j = 0; j < nd.childNodes[i].childNodes.length; j++ )
+            {
+                var n = nd.childNodes[i].childNodes[j];
+                if(n.nodeType == 1)
+                {
+                    if(n.nodeName == 'label'){ opt.label = n.firstChild.data; }
+                    if(n.nodeName == 'value'){ opt.value = n.firstChild.data; }
+                }
+            }
+            ctrl.options.push(opt);
+        }   
+    
+    }
     return ctrl;
 }
 
 function addOptions(ele, ctrl)
 {
-    ctrl.options = [];
+   /* ctrl.options = [];
     var opts = ele.getElementsByTagName('item');
     for(var i = 0; i < opts.length; i++)
     {
@@ -47,7 +74,7 @@ function addOptions(ele, ctrl)
             label : ele.getElementByTagName('label')[0].firstChild.data,
             value : ele.getElementByTagName('value')[0].firstChild.data
         })
-    }
+    }*/
     return ctrl;
 }
 
@@ -56,6 +83,7 @@ function parseXML(xml)
 {
     var form = {controls : []};
     var ctrl = {};
+    xml = xml.firstChild;
     
     for(var i = 0; i < xml.childNodes.length; i++){    
         if(xml.childNodes[i].nodeType != 1) continue;
@@ -66,20 +94,21 @@ function parseXML(xml)
                 form.id = model.getAttribute('id');
                 form.name = model.getAttribute('projectName');
                 form.version = model.getAttribute('versionNumber');
+                
                 break;
             case "input":
-                ctrl = parseCtrl(xml.childNode[i]);
+                ctrl = parseCtrl(xml.childNodes[i]);
                 break;
             case "select1":
-                ctrl = parseCtrl(xml.childNode[i]);
-                ctrl = addOptions(xml.childNode[i], ctrl);
+                ctrl = parseCtrl(xml.childNodes[i]);
+                //ctrl = addOptions(xml.childNodes[i], ctrl);
                 break;
             case "select":
-                ctrl = parseCtrl(xml.childNode[i]);
-                ctrl = addOptions(xml.childNode[i], ctrl);
+                ctrl = parseCtrl(xml.childNodes[i]);
+                //ctrl = addOptions(xml.childNodes[i], ctrl);
                 break;  
         }
-        form.controls.push(ctrl);
+        if(ctrl.options) form.controls.push(ctrl);
     }
     return form;
 }
@@ -90,10 +119,10 @@ function drawForm(form, target)
     {
         target = document.getElementById(target);
     }
-
+    
     target.appendChild(createDOMElement('h2', 'header', '', form.name + ' v ' + form.version));
     
-    var frm = createDOMElement('form', 'epiForm', '');
+   var frm = createDOMElement('form', 'epiForm', '');
     for(var i = 0; i < form.controls.length; i++)
     {
         frm.appendChild(createDOMElement('span', '', 'controlLabel', form.controls[i].label));
@@ -123,15 +152,15 @@ function createHtml5FormControl(ctrl)
             break;
         case 'input' :
             break;
-        case ' select1' :
+        case 'select1' :
             for(var o = 0; o < ctrl.options.length; o++)
             {
-                c.appendChild(createDOMElement('option', '', 'optionLabel', ctrl.options[o].label, {value : ctrls.options[o].value}));
+                c.appendChild(createDOMElement('option', '', '', ctrl.options[o].label, {value : ctrl.options[o].value}));
                 
             }
             break;
     }
-    
+    return c;
 }
 
 function createDOMElement(tagName, id, className, content, attributes)
@@ -139,7 +168,7 @@ function createDOMElement(tagName, id, className, content, attributes)
     var ele = document.createElement(tagName);
     ele.id = id;
     ele.className = className;
-    ele.innerHtml = content;
+    ele.appendChild(document.createTextNode(content));
     if(attributes)
     {
         for(att in attributes){
