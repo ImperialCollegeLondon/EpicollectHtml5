@@ -1,8 +1,7 @@
 <epicollect> 
-
-<model> 
-<submission id="ahBlcGljb2xsZWN0c2VydmVycg8LEgdQcm9qZWN0GKbgFAw" projectName="demoproject" allowDownloadEdits="false" versionNumber="1.1" />
-</model>
+	<model> 
+		<submission id="ahBlcGljb2xsZWN0c2VydmVycg8LEgdQcm9qZWN0GKbgFAw" projectName="demoproject" allowDownloadEdits="false" versionNumber="1.1" />
+	</model>
 
 	<input ref="name" required="true" title="true">
 		<label>What is your name?</label>
