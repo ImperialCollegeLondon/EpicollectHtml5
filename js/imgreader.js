@@ -1,19 +1,3 @@
-/*function init() {
-	if (null == window.localStorage.getItem('items')) {
-		window.localStorage.setItem('items', JSON.stringify([]));
-	} else {
-		document.getElementById('gallery').innerHTML = '';
-		var items = JSON.parse(window.localStorage.getItem('items'));
-		for (var i = 0; i < items.length; i++) {
-			onAddNewItem(items[i]);
-		}
-	}
-}
-
-window.addEventListener('load', function(even) {
-	init();
-}, false);*/
-
 function onchange_file(input) {
 	var file = input.files[0];
 	
@@ -53,21 +37,22 @@ function onClickSaveToLocal(input) {
 	obj['img'] = document.getElementById('img-previewer').src;
 	obj['geo'] = geoInput.value;
 	
-	var items = JSON.parse(window.localStorage.getItem('items'));
+	var items = JSON.parse(window.localStorage.getItem(currentProject));
 	var itemId = 'item-' + new Date().getTime();
 	items.push(itemId);
 	
 	try {
 		window.localStorage.setItem(itemId, JSON.stringify(obj));
-		window.localStorage.setItem('items', JSON.stringify(items));
+		window.localStorage.setItem(currentProject, JSON.stringify(items));
 		onAddNewItem(itemId);
+		alert('Your entry has been stored');
 	} catch (e) {
-		alert('Error occurs when adding data to local storage: '  + e);
+		alert('Your entry could not be added: '  + e);
 	}
 }
 
 function onClickDelImg(itemId) {
-	var items = JSON.parse(window.localStorage.getItem('items'));
+	var items = JSON.parse(window.localStorage.getItem(currentProject));
 	var newItems = [];
 	for (var i = 0; i < items.length; i++) {
 		if (items[i] != itemId) {
@@ -75,7 +60,7 @@ function onClickDelImg(itemId) {
 		}
 	}
 	
-	window.localStorage.setItem('items', JSON.stringify(newItems));
+	window.localStorage.setItem(currentProject, JSON.stringify(newItems));
 	window.localStorage.removeItem(itemId);
 	document.getElementById(itemId).parentNode.removeChild(document.getElementById(itemId));
 }
@@ -146,14 +131,14 @@ function onClickSaveEpiForm() {
 	
 	// TODO do some checking
 	
-	var itemsStr = window.localStorage.getItem('items');
+	var itemsStr = window.localStorage.getItem(currentProject);
 	var items = JSON.parse(!itemsStr ? '[]' : itemsStr);
 	var itemId = 'item-' + new Date().getTime();
 	items.push(itemId);
 	
 	try {
 		window.localStorage.setItem(itemId, JSON.stringify(epiData));
-		window.localStorage.setItem('items', JSON.stringify(items));
+		window.localStorage.setItem(currentProject, JSON.stringify(items));
 		// onAddNewItem(itemId);
 	} catch (e) {
 		alert('Error occurs when adding data to local storage: '  + e);
@@ -163,7 +148,7 @@ function onClickSaveEpiForm() {
 }
 
 function onClickClearEpiData() {
-	var itemsStr = window.localStorage.getItem('items');
+	var itemsStr = window.localStorage.getItem(currentProject);
 	var items = JSON.parse(!itemsStr ? '[]' : itemsStr);	
 	items.forEach(function(itemId) {
 		if (!window.localStorage.getItem(itemId)) {
@@ -173,7 +158,7 @@ function onClickClearEpiData() {
 		window.localStorage.removeItem(itemId);
 	});
 	
-	window.localStorage.removeItem('items');
+	window.localStorage.removeItem(currentProject);
 	displayLocalData();
 }
 /************** end ************/

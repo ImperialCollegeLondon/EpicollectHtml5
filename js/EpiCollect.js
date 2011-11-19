@@ -1,4 +1,5 @@
-var survey
+var survey;
+var currentProject = "demoProject";
 
 function getXML(url, callback)
 {
@@ -21,13 +22,12 @@ function getXML(url, callback)
         {
             callback(xmlhttp.responseXML);
         }
-    }    
+    };    
 }
 
 function parseCtrl(nd)
 {
     var ctrl = {options : []};
-    var attrName;
     var opt;
     
     ctrl.name = nd.attributes.getNamedItem('ref').value;
@@ -137,7 +137,7 @@ function createHtml5FormControl(ctrl)
         select1 : 'select',
         input : 'input',
         select : 'div'
-    }
+    };
     var d = createDOMElement('div', '', 'ctrlRow', '');
     d.appendChild(createDOMElement('span', '', 'controlLabel', ctrl.label));
     var c = createDOMElement(tags[ctrl.type], ctrl.name, 'ctrl', '', ctrl);
@@ -160,7 +160,7 @@ function createHtml5FormControl(ctrl)
             }
             break;
     }
-    d.appendChild(c)
+    d.appendChild(c);
     return d;
 }
 
@@ -200,7 +200,7 @@ function displayLocalData()
     }
    // document.getElementById('localData').appendChild(hr);
     
-    var ents = JSON.parse(window.localStorage.getItem('items'));
+    var ents = JSON.parse(window.localStorage.getItem(currentProject));
     var r;
     for(var i = 0; i < ents.length; i++)
     {
