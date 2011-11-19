@@ -121,7 +121,7 @@ function onClickGeolocation(input) {
 
 /************** functions for adding epiForm to local storage ******************/
 
-function onClickSaveEpiForm(input) {
+function onClickSaveEpiForm() {
 	var epiForm = document.getElementById('epiForm');
 	if (!epiForm) {
 		return;
@@ -157,7 +157,9 @@ function onClickSaveEpiForm(input) {
 		// onAddNewItem(itemId);
 	} catch (e) {
 		alert('Error occurs when adding data to local storage: '  + e);
-	}	
+	}
+	
+	displayLocalData();
 }
 
 function onClickClearEpiData() {
@@ -172,5 +174,6 @@ function onClickClearEpiData() {
 	});
 	
 	window.localStorage.removeItem('items');
+	displayLocalData();
 }
 /************** end ************/

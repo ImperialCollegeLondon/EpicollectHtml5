@@ -182,23 +182,35 @@ function createDOMElement(tagName, id, className, content, attributes)
 function displayLocalData()
 {
     var fields = [];
+    if(document.getElementById('localData').tHead.rows.length > 0) document.getElementById('localData').tHead.deleteRow(0);
+    while( document.getElementById('localData').tBodies[0].rows.length > 0) document.getElementById('localData').tBodies[0].deleteRow(0);
     
     for(var h = 0; h < form.controls.length; h++)
     {
         fields.push(form.controls[h].name);
     }
-    fields.push('location');
-    fields.push('image');
+    fields.push('geolocation');
+    fields.push('img');
+    var hr = document.getElementById('localData').tHead.insertRow(0);
     
     for(var f = 0; f < fields.length; f++)
     {
-        var he = createDOMElement('th', '', '', fields[f].name);
-        document.getElementById('localData').tHead.appendChild(he);
+        var he = createDOMElement('th', '', '', fields[f]);
+        hr.appendChild(he);
     }
+   // document.getElementById('localData').appendChild(hr);
     
-    var ents = window.localStoreage.getItem('items');
+    var ents = JSON.parse(window.localStorage.getItem('items'));
+    var r;
     for(var i = 0; i < ents.length; i++)
     {
-        
+        item = JSON.parse(window.localStorage.getItem(ents[i]));
+        r = document.getElementById('localData').tBodies[0].insertRow(0);
+        for(var f = 0; f < fields.length; f++)
+        {
+            var he = createDOMElement('td', '', '', fields[f] == 'img' ? '' : item[fields[f]]);
+            if(fields[f] == 'img') he.appendChild(createDOMElement('img', '','','',{src : item[fields[f]]}) );
+            r.appendChild(he);
+        }
     }
 }
