@@ -22,5 +22,5 @@ function selectTab(tabName)
         //alert(ts[t].className);
     }
     document.getElementById(tabName).className += " selected";
-    document.getElementById(tabName.replace("Tab", "")).className += " selected"
+    document.getElementById(tabName.replace("Tab", "")).className += " selected";
 }

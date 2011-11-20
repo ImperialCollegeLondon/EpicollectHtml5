@@ -1,7 +1,13 @@
 var survey;
 var currentProject = "demoProject";
 
-function getXML(url, callback)
+function getProject(projectName)
+{
+	getXML("./" + projectName + '.xml',storeXML, {projectName : projectName});
+	
+}
+
+function getXML(url, callback, opts)
 {
     var xmlhttp;
     if (window.XMLHttpRequest)
@@ -20,9 +26,14 @@ function getXML(url, callback)
     {
         if (xmlhttp.readyState==4 && xmlhttp.status==200)
         {
-            callback(xmlhttp.responseXML);
+            callback(xmlhttp.responseHttp, opts);
         }
     };    
+}
+
+function storeXML(xml, opts)
+{
+	window.localStorage.set("xml_" + project, xml); 
 }
 
 function parseCtrl(nd)
